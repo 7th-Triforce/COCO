@@ -1,15 +1,144 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Viajante_de_comercio
+class Program
 {
-    internal class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Ejemplo de uso
+        int numeroDeVertices = 5;
+        GrafoPonderado grafo = new GrafoPonderado(numeroDeVertices);
+        int verticeInicial = 0;
+
+        List<int> solucion = ProblemaViajante(grafo, verticeInicial);
+
+        Console.WriteLine("Solución del Problema del Viajante:");
+        foreach (var vertice in solucion)
         {
+            Console.Write($"{vertice} ");
+        }
+    }
+
+    static List<int> ProblemaViajante(GrafoPonderado grafo, int vertice)
+    {
+        List<int> solucion = new List<int>();
+        int numeroDeVertices = grafo.NumeroDeVertices;
+        bool[] visitado = new bool[numeroDeVertices];
+
+        for (int v = 0; v < numeroDeVertices; v++)
+        {
+            visitado[v] = false;
+        }
+
+        solucion.Add(vertice);
+        visitado[vertice] = true;
+        int verticeActual = vertice;
+
+        while (ExisteVerticeNoVisitado(visitado))
+        {
+            int siguienteVertice = ExtraerVerticeConDistanciaMinimaDesde(grafo, verticeActual, visitado);
+
+            if (siguienteVertice >= 0)
+            {
+                solucion.Add(siguienteVertice);
+                // Añadir arista dirigida desde verticeActual a siguienteVertice
+                int peso = grafo.AgregarAristaDirigida(verticeActual, siguienteVertice);
+                Console.WriteLine($"Añadiendo arista dirigida de {verticeActual} a {siguienteVertice} con peso {peso}");
+                visitado[siguienteVertice] = true;
+                verticeActual = siguienteVertice;
+            }
+            else
+            {
+                // No quedan vértices no visitados
+                break;
+            }
+        }
+
+        // Vuelta a casa
+        grafo.AgregarAristaDirigida(verticeActual, vertice);
+        Console.WriteLine($"Añadiendo arista dirigida de vuelta a casa desde {verticeActual} a {vertice}");
+
+        return solucion;
+    }
+
+    static bool ExisteVerticeNoVisitado(bool[] visitado)
+    {
+        return visitado.Any(v => !v);
+    }
+
+    static int ExtraerVerticeConDistanciaMinimaDesde(GrafoPonderado grafo, int verticeActual, bool[] visitado)
+    {
+        int minPeso = int.MaxValue;
+        int siguienteVertice = -1;
+
+        foreach (var arista in grafo.ObtenerAristasDesde(verticeActual))
+        {
+            if (!visitado[arista.Destino] && arista.Peso < minPeso)
+            {
+                minPeso = arista.Peso;
+                siguienteVertice = arista.Destino;
+            }
+        }
+
+        return siguienteVertice;
+    }
+
+    class GrafoPonderado
+    {
+        private List<Arista>[] listaDeAdyacencia;
+
+        public int NumeroDeVertices { get; }
+
+        public GrafoPonderado(int numeroDeVertices)
+        {
+            NumeroDeVertices = numeroDeVertices;
+            listaDeAdyacencia = new List<Arista>[numeroDeVertices];
+
+            for (int i = 0; i < numeroDeVertices; i++)
+            {
+                listaDeAdyacencia[i] = new List<Arista>();
+            }
+
+            // Agrega aristas con pesos (en este ejemplo, pesos aleatorios para simular un grafo disperso).
+            Random random = new Random();
+            for (int i = 0; i < numeroDeVertices; i++)
+            {
+                for (int j = i + 1; j < numeroDeVertices; j++)
+                {
+                    if (random.Next(2) == 0) // Agrega arista con probabilidad del 50%
+                    {
+                        int peso = random.Next(1, 10); // Pesos aleatorios entre 1 y 10.
+                        listaDeAdyacencia[i].Add(new Arista(j, peso));
+                        listaDeAdyacencia[j].Add(new Arista(i, peso));
+                    }
+                }
+            }
+        }
+
+        public int AgregarAristaDirigida(int origen, int destino)
+        {
+            // Implementa la lógica para agregar una arista dirigida.
+            int peso = listaDeAdyacencia[origen].Find(a => a.Destino == destino)?.Peso ?? 0;
+            Console.WriteLine($"Añadiendo arista dirigida de {origen} a {destino} con peso {peso}");
+            return peso;
+        }
+
+        public IEnumerable<Arista> ObtenerAristasDesde(int vertice)
+        {
+            return listaDeAdyacencia[vertice];
+        }
+    }
+
+    class Arista
+    {
+        public int Destino { get; }
+        public int Peso { get; }
+
+        public Arista(int destino, int peso)
+        {
+            Destino = destino;
+            Peso = peso;
         }
     }
 }

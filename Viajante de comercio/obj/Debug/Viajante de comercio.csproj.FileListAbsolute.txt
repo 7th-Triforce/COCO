@@ -1,0 +1,7 @@
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\bin\Debug\Viajante de comercio.exe.config
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\bin\Debug\Viajante de comercio.exe
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\bin\Debug\Viajante de comercio.pdb
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\obj\Debug\Viajante de comercio.csproj.AssemblyReference.cache
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\obj\Debug\Viajante de comercio.csproj.CoreCompileInputs.cache
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\obj\Debug\Viajante de comercio.exe
+D:\7th-Triforce\Documents\One Drive\OneDrive - UFV\Fer\Universidad\3º\1º Cuatrimestre\COCO\Prácticas\COCO\Viajante de comercio\obj\Debug\Viajante de comercio.pdb
