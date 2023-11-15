@@ -44,7 +44,7 @@ namespace Viajante_de_comercio
         }
 
         // Función para obtener la siguiente permutación
-        private bool SiguientePermutacion(int[] array)
+        private bool SiguientePermutacion(int[] array)                   // 9n + 12
         {
             int i = array.Length - 1;                                    // 1 + 1
             while (i > 0 && array[i - 1] >= array[i])                    // n + 2n
